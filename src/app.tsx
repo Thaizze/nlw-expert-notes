@@ -8,16 +8,17 @@ export function App() {
       <img src={logo} alt="Logo NLW Expert" />
 
       <form className='w-full'>
-        <input type='text' className='w-full bg-transparent text-3xl font-semibold tracking-tight placeholder:text-slate-500 outline-none' placeholder='Busque ...' />
+        <input type='text' className='w-full bg-transparent text-3xl font-semibold tracking-tight placeholder:text-slate-500 outline-none' placeholder='Busque por uma nota...' />
       </form>
 
       <div className='h-px bg-slate-700' />
 
       <div className='grid grid-cols-3 gap-6 auto-rows-[250px]'>
         <NewNoteCard />
-        <NoteCard />
+        <NoteCard note={{date: new Date(), content: "Hello!"}} />
       </div>
     </div>
   )
 }
 
+ 
