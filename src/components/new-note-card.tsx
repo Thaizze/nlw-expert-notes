@@ -3,7 +3,11 @@ import { X } from 'lucide-react'
 import { ChangeEvent, FormEvent, useState } from 'react'
 import { toast } from 'sonner'
 
-export function NewNoteCard() {
+interface NewNoteCardProps{
+    onNoteCreated: (content: string) => void
+}
+
+export function NewNoteCard({ onNoteCreated }: NewNoteCardProps) {
     const [shouldShowOnbording, setShouldShowOnbording] = useState(true)
     const [content, setContent] = useState('')
 
@@ -21,7 +25,11 @@ export function NewNoteCard() {
 
     function handleSaveNote(event: FormEvent){
         event.preventDefault()
-        console.log(content)
+        onNoteCreated(content)
+
+        setContent('')
+        setShouldShowOnbording(true)
+
         toast.success('Nota criada com sucesso!')
     }
 
@@ -46,7 +54,7 @@ export function NewNoteCard() {
                             {shouldShowOnbording ? (
                                 <p className='text-sm leading-6 text-slate-400'>Comece <button className='font-medium text-lime-400 hover:underline'>gravando uma nota</button> em áudio, ou se preferir <button onClick={handleStartEditor} className='font-medium text-lime-400 hover:underline'>utilize apenas um texto</button>.</p>
                             ) : (
-                                <textarea autoFocus className='text-sm leading-6 text-slate-400 bg-transparent resize-none flex-1 outline-none' onChange={handleContentChanged} />
+                                <textarea autoFocus className='text-sm leading-6 text-slate-400 bg-transparent resize-none flex-1 outline-none' onChange={handleContentChanged} value={content} />
                             )}
                         </div>
                         <button type='submit' className='w-full bg-lime-400 py-4 text-sm text-lime-950 outline-none font-medium hover:bg-lime-500'>Salvar Nota</button> 
